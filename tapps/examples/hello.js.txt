@@ -1,0 +1,55 @@
+/**
+ * A Hello Word Tadapp
+ * @author: Me
+ */
+
+goog.require('goog.dom');
+goog.require('goog.dom.classes');
+goog.require('goog.events');
+
+var colours = [
+	'default',
+	'primary',
+	'success',
+	'info',
+	'warning',
+	'danger'
+];
+var current = colours[1];
+
+app.preExecute = function() {
+	ta.general().setTitle('Hello World');
+};
+
+app.execute = function() {
+	return bootstrap.components.jumbotron({
+		id: 'helloworld',
+		title: '1234567890',
+		content: 'Can you shuffle it back to original?',
+		button: {
+			title: 'Shuffle'
+		}
+	});
+};
+
+app.postExecute = function() {
+	goog.events.listen(document.querySelector('#helloworld a.btn'),
+		goog.events.EventType.CLICK, function(e) {
+			goog.dom.classes.remove(e.target, 'btn-'+current);
+			current = colours[Math.floor(Math.random() * 6)];
+			goog.dom.classes.add(e.target, 'btn-'+current);
+			app.shuffle(document.querySelector('#helloworld h1'));
+	});
+};
+
+app.shuffle = function(element) {
+	var string = goog.dom.getTextContent(element);
+	var parts = string.split('');
+	for(var i = parts.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var tmp = parts[i];
+        parts[i] = parts[j];
+        parts[j] = tmp;
+    }
+    goog.dom.setTextContent(element, parts.join(''));
+};

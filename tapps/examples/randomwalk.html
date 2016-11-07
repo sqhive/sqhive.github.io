@@ -1,0 +1,28 @@
+<html>
+	<head>
+		<title>Random Walk</title>
+		<script src="/assets/js/closure-library/closure/goog/base.js"></script>
+		<script>
+			goog.require('goog.string');
+			goog.require('goog.soy');
+		</script>
+		<script src="/assets/js/soyutils_usegoog.js"></script>
+		<script src="/templates/compiled.js"></script>
+		
+		<script src="randomwalk.js"></script>
+		
+		
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	</head>
+	<body>
+		<script>
+			app.preExecute();
+		</script>
+		<script>
+			document.write(app.execute());
+		</script>
+		<script>
+			app.postExecute();
+		</script>
+	</body>
+</html>
